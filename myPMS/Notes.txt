@@ -1,0 +1,246 @@
+**Data Flow Diagrams (DFDs) for Project Management System (PMS)**
+
+## **Level 0 DFD (Context Diagram)**
+
+### **Description:**
+
+The Level 0 diagram represents the overall system and its interaction with external entities (Admin, Client, Developer, Tester). It provides a high-level view of how data flows between these entities and the system.
+
+### **Entities and Interactions:**
+
+- **Client** → Requests a project, views project updates.
+- **Admin** → Manages users, assigns tasks, monitors progress.
+- **Developer** → Receives tasks, submits work, fixes bugs.
+- **Tester** → Tests the system, reports bugs, verifies fixes.
+
+```
+(Client) → (Project Request) → [PMS System] → (Admin Assigns Task)
+(Developer) ← (Receives Task) ← [PMS System] → (Submits Work)
+(Tester) ← (Receives Task) ← [PMS System] → (Reports Bugs)
+(Client/Admin) ← (Views Reports) ← [PMS System]
+```
+
+---
+
+## **Level 1 DFD (System Breakdown)**
+
+### **Processes:**
+
+1. **User Management** (Handled by Admin)
+   - Add/Remove Users
+   - Assign Roles
+2. **Project Handling** (Handled by Client & Admin)
+   - Client submits project request
+   - Admin approves and assigns tasks
+3. **Development Process** (Handled by Developer)
+   - Work on assigned tasks
+   - Submit completed code
+4. **Testing Process** (Handled by Tester)
+   - Test developed features
+   - Report bugs to developers
+   - Verify bug fixes
+5. **Progress Tracking** (Handled by Admin & Client)
+   - Monitor project progress
+   - Generate reports
+
+### **Data Flow Representation:**
+
+```
+(Client) → (Submit Project) → [PMS]
+(Admin) → (Approve Project & Assign Tasks) → [PMS]
+(Developer) → (Work on Task) → [PMS] → (Submit Work)
+(Tester) → (Test Code) → [PMS] → (Report Bugs)
+(Admin/Client) ← (Monitor Progress) ← [PMS]
+```
+
+---
+
+## **Level 2 DFD (Detailed Process Expansion)**
+
+### **1. Developer Workflow**
+
+- **Login to System**
+- **View Assigned Tasks**
+- **Develop & Submit Code**
+- **Receive & Fix Bugs**
+- **Update Task Status**
+
+### **2. Tester Workflow**
+
+- **Login to System**
+- **View Assigned Test Cases**
+- **Execute Tests**
+- **Report Bugs**
+- **Verify Fixes**
+- **Close Bug Reports**
+
+### **Detailed Representation:**
+
+```
+(Developer) → (Login) → (View Assigned Task)
+(Developer) → (Write Code) → (Submit Code) → [PMS]
+(Tester) → (Receive Code) → (Execute Tests)
+(Tester) → (Report Bug) → (Developer Fixes Bug)
+(Developer) → (Submit Fix) → (Tester Verifies Fix)
+(Tester) → (Close Bug) → (Update Project Status)
+```
+
+---
+
+### **Next Steps:**
+
+To implement these flows into a fully functional website, consider:
+
+- A **dashboard system** for each entity.
+- A **real-time update mechanism** for project progress.
+- **Bug tracking & ticketing system** for developer-tester collaboration.
+- **Notifications & reporting tools** for monitoring and task updates.
+
+Would you like additional UI/UX suggestions or database schema recommendations?
+
+yes
+
+please suggest both of the recommendation 
+
+==============================================================================================
+Entities & Roles in the Project Management System (PMS)
+1. Admin
+Role: Manages the overall system, users, and projects.
+
+Responsibilities:
+✅ Manage users (add, update, delete clients, developers, testers, project managers).
+✅ Assign projects to clients.
+✅ Assign developers and testers to projects.
+✅ Monitor project progress and generate reports.
+✅ Handle system settings and configurations.
+✅ Ensure proper role-based access control (RBAC).
+
+2. Client
+Role: Requests projects, tracks progress, and provides feedback.
+
+Responsibilities:
+✅ Submit new project requests with requirements.
+✅ Track project status and milestones.
+✅ Communicate with the project manager, developers, and testers.
+✅ Review project deliverables and request modifications if needed.
+✅ Approve or reject final project submissions.
+
+3. Developer
+Role: Works on assigned projects, develops features, and fixes issues.
+
+Responsibilities:
+✅ View assigned projects and tasks.
+✅ Develop project modules as per client requirements.
+✅ Submit progress updates and reports.
+✅ Fix bugs reported by testers.
+✅ Communicate with the project manager, tester, and client for clarifications.
+
+4. Tester
+Role: Tests project features, reports bugs, and ensures quality.
+
+Responsibilities:
+✅ View assigned projects and test functionalities.
+✅ Identify and report bugs to developers.
+✅ Verify bug fixes and project stability.
+✅ Communicate with developers and project managers for issue resolution.
+✅ Submit final testing reports before project completion.
+
+5. Project Manager
+Role: Oversees project execution and ensures smooth workflow.
+
+Responsibilities:
+✅ Assign tasks to developers and testers.
+✅ Monitor project progress and deadlines.
+✅ Review reports from developers and testers.
+✅ Communicate with clients and update them on project status.
+✅ Approve project completion before final submission to the client.
+
+How These Entities Work Together
+Client submits a project request.
+Admin assigns the project to a Project Manager.
+Project Manager assigns tasks to Developers and Testers.
+Developer builds the project and submits updates.
+Tester verifies functionality and reports bugs.
+Developer fixes issues, and Tester revalidates.
+Client reviews the final product and requests modifications if needed.
+Project Manager ensures project completion and submits it to the Client.
+Admin oversees the entire workflow and generates system reports.
+=============================================================================================
+Login & Registration Functionality for PMS
+🔹 Admin is a Static Entity (Manually added in the database, cannot register via UI).
+🔹 Only Clients, Developers, Testers, and Project Managers can Register.
+
+1. User Registration (Client, Developer, Tester, Project Manager)
+📌 Purpose: Allows new users (excluding Admin) to create an account.
+
+Features:
+✅ User Role Selection (Client, Developer, Tester, Project Manager).
+✅ Input Fields:
+
+Name, Email, Username, Password, Confirm Password.
+Contact Details (Phone, Address, etc.).
+✅ Validation Checks:
+Unique email and username.
+Strong password policy (min. length, special characters, numbers).
+Required fields must be filled.
+✅ Admin Approval Mechanism: (Optional)
+Registration requests go to Admin for approval before activating the account.
+✅ Database Storage:
+Passwords hashed (bcrypt or Argon2).
+Role-based access stored in the database.
+✅ Email Verification (Optional):
+Send an activation link before login is enabled.
+✅ Redirect to Login Page after successful registration.
+Flow:
+User selects a role (Client, Developer, Tester, Project Manager).
+Fills out the registration form.
+System validates input fields.
+If validation is successful:
+Store user data in the database (hashed password).
+If Admin Approval is required, mark the account as Pending.
+If email verification is enabled, send an activation link.
+Once approved/verified, allow login.
+2. User Login
+📌 Purpose: Allows registered users to log in and access their dashboards.
+
+Features:
+✅ Input Fields: Username/Email & Password.
+✅ Validation Checks:
+
+Ensure both fields are filled.
+Match credentials with the database.
+Ensure the account is approved by Admin (if approval system is enabled).
+✅ Session Handling:
+Use PHP sessions or JWT authentication.
+✅ Role-Based Redirection:
+Client → Client Dashboard
+Developer → Developer Dashboard
+Tester → Tester Dashboard
+Project Manager → PM Dashboard
+Admin (static) → Admin Panel
+Flow:
+User enters email/username and password.
+System verifies credentials in the database.
+If valid:
+Start a session or generate JWT token.
+Redirect to the respective dashboard.
+If invalid:
+Show an error message.
+Provide an option for Forgot Password.
+3. Forgot Password & Reset Password (Optional)
+✅ Forgot Password: Users enter their email to receive a reset link.
+✅ Reset Password: Validate reset link, allow password update.
+
+4. Admin Role (Static, Cannot Register)
+✅ The Admin account is pre-created in the database (manually inserted).
+✅ Only Admin can approve new user registrations (if approval is enabled).
+✅ Admin can manage users (approve, suspend, or delete).
+
+Technology Stack for Implementation
+Backend: PHP (with MySQL).
+Frontend: HTML, CSS, JavaScript (Bootstrap 4).
+Security Measures:
+Password hashing (bcrypt/Argon2).
+Session-based authentication or JWT tokens.
+CSRF protection and input validation.
+Admin approval mechanism for user activation.
