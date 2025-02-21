@@ -1,0 +1,78 @@
+.searchBar {
+    justify-content: center;
+    width: auto;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+
+.searchBar button {
+    border-radius: 0px 20px 20px 0px;
+}
+
+/* Remove the default blue outline on focus */
+.search-input:focus,
+.search-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: none;
+}
+
+a {
+    cursor: pointer;
+}
+
+/* settingPanel */
+.settingClass {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60%;
+    width: 50%;
+}
+
+form i {
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+form input {
+    width: 70%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 2;
+    color: white;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+    padding-right: 30px;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#custom-popup {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: rgba(0, 0, 0, 0.8);
+color: white;
+padding: 20px;
+border-radius: 10px;
+text-align: center;
+min-width: 200px;
+}
+#popup-close {
+margin-top: 10px;
+padding: 5px 10px;
+background: #007bff;
+color: white;
+border: none;
+cursor: pointer;
+}
